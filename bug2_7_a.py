@@ -63,7 +63,7 @@ slope=(q_g[1]-q_s[1])/(q_g[0]-q_s[0])
 c=q_s[1]-(slope*q_s[0])
 
 
-def towards_goal(q,x,w):#x is x xordinate,w is polygon obstacle
+def towards_goal(q,x,w):# is x xordinate,w is polygon obstacle
 
 	y=(slope)*(q+x)+c
 	follow_point=(q+x,y)
