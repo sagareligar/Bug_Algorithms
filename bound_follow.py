@@ -117,94 +117,114 @@ plt.plot(start,end,'m',label='bug-line',linewidth=2)
 x=obst_point[0]
 y=obst_point[1]
 
-flag_y=1
-flag_x=0
+y_i=1
 y_axis=1
-x_axis=0
-count=0
+y_d=0
 
+x_i=1
+x_axis=0
+x_d=0
+
+endless=0
 
 while(True):
 
-	
+	#if(y==0 and x==30):
+	#	break
 
-	if(x==-6 and y==-6):
-		break
 
-	if(flag_y==1):
+
+
+	count=0
+	if(y_i==1 and y_axis==1):
+		x=round(x)
 		y=y+0.01
 		point=Point(x,y)
-		print(point)
-		if(point.touches(poly)):
-			plt.plot((x,x),(y-0.01,round(y)),'m',label='bug-line',linewidth=2)			
-			continue
-		else:
-			y=y-0.1
-			flag_y=0
-					
-			
-	if(flag_x==0):
-		y=round(y)
-		x=x+0.01
-		point=Point(x,y)
-		print(point)
-		if(point.touches(poly)):
-			plt.plot((x-0.01,round(x)),(y,y),'m',label='bug-line',linewidth=2)						
-			continue
-		else:
+		while(point.touches(poly)):
+			plt.plot((x,x),(y-0.01,round(y)),'m',label='bug-line',linewidth=2)
+			y=y+0.01
+			count=count+1
+			point=Point(x,y)
+			print(point)
+			if((y>(obst_point[1]-0.2) and y<obst_point[1]) and (x==obst_point[0])):
+				endless=10
+				break
+		if(endless==10):
+			break						
+		y=y-0.01
+		if(count>1):
+			y_d=0
+			x_axis=1
+			y_axis=0
 
-			flag_x=1
-			count=0
-			
-			
-	if(flag_y==1):
+		else:
+			y_axis=1
+			y_d=1
+	count=0
+
+	if(y_d==1 and y_axis==1):
 		x=round(x)
 		y=y-0.01
 		point=Point(x,y)
-		if(point.touches(poly)):
-			plt.plot((x,x),(y+0.01,round(y)),'m',label='bug-line',linewidth=2)
-						
-			continue
+		while(point.touches(poly)):
+			plt.plot((x,x),(round(y),y+0.01),'m',label='bug-line',linewidth=2)
+			y=y-0.01
+			count=count+1
+			point=Point(x,y)
+			print(point)
+
+		y=y+0.01
+		if(count>1):
+			y_i=0
+			x_axis=1
+			y_axis=0		
 		else:
-			
-			if(count>1):
-				y_axis=0
-				x_axis=1
-			flag_y=0
-			count=0
-			
-			
-	if(flag_x==1 and x_axis==1):
+			y_axis=1
+			y_i=1
+	count=0
+	if(x_axis==1 and x_i==1):
 		y=round(y)
-		x=x-0.1
+		x=x+0.01
 		point=Point(x,y)
-		print(point)
-		if(point.touches(poly)):
-			plt.plot((x+0.01,round(x)),(y,y),'m',label='bug-line',linewidth=2)
-			
-			continue
+		while(point.touches(poly)):
+			plt.plot((x-0.01,x),(y,y),'m',label='bug-line',linewidth=2)						
+			x=x+0.01
+			count=count+1
+			point=Point(x,y)
+			print(point)
+		x=x-0.01
+		if(count>1):
+			x_d=0
+			x_axis=0
+			y_axis=1
 		else:
-			
+			x_axis=1
+			x_d=1
 
-			flag_x=0
-			count=0
-		
+	count=0
+	if(x_axis==1 and x_d==1):
+		y=round(y)
+		x=x-0.01
+		point=Point(x,y)
+		while(point.touches(poly)):
+			plt.plot((x,x+0.01),(y,y),'m',label='bug-line',linewidth=2)
+			x=x-0.01
+			count=count+1
+			point=Point(x,y)
+			print(point)
+		x=x+0.01
+		if(count>1):
+			x_i=0
+			x_axis=0
+			y_axis=1
+
+		else:
+			x_axis=1
+			x_i=1
 
 
-
-
-
-
-
-
-
-			
 
 	
-
-
-
-    
 
 
 
